@@ -1,130 +1,179 @@
+/* Add to your HTML head or main CSS file */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
 /* Navbar Container */
 .nav-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;  /* Center items vertically */
+  align-items: center;
   padding: 1rem 2rem;
   background-color: #fff;
   position: sticky;
   top: 0;
   z-index: 999;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  height: 5rem;  /* Fixed height for the navbar */
+  height: 5rem;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Logo (Stor-Edge) */
+/* Logo Styles */
 .logo {
-  font-family: 'Arial', sans-serif;
   font-size: 2.2rem;
   font-weight: 600;
   color: #333;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: color 0.3s ease-in-out;
-  display: flex;  /* Ensure logo and image align side by side */
-  align-items: center;  /* Center the text and image vertically */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s ease;
 }
 
 .logo:hover {
-  color: #007bff;  /* Change color on hover */
+  color: #007bff;
 }
 
+.logo-img {
+  height: 3.5rem;
+  transition: transform 0.3s ease;
+}
 
+.logo-img:hover {
+  transform: rotate(5deg);
+}
 
-/* Navbar Links */
+/* Navigation Links */
 .nav-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
   list-style: none;
 }
 
-.nav-links li a {
+.nav-links a {
   text-decoration: none;
   color: #333;
   font-weight: 500;
-  transition: color 0.3s, transform 0.3s;
+  position: relative;
+  padding-bottom: 0.3rem;
+  transition: all 0.3s ease;
 }
 
-.nav-links li a:hover {
-  color: #007bff;
-  transform: scale(1.05);
-  transform-origin: center;
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #007bff;
+  transition: width 0.3s;
 }
 
-/* Auth Section (Login | Signup and Profile Pic) */
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Auth Section */
 .auth-section {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
-/* Login Link */
-.login-link {
-  color: #333;
-  font-size: 1rem;
+/* Auth Buttons */
+.auth-button {
+  font-family: 'Poppins', sans-serif;
   font-weight: 500;
-  transition: color 0.3s, transform 0.3s, cursor 0.3s;
-  cursor: pointer;
-}
-
-.login-link:hover {
-  color: #28a745;
-  transform: scale(1.1);
-  text-decoration: underline;
-}
-
-/* Signup Link */
-.signup-link {
-  color: #333;
   font-size: 1rem;
-  font-weight: 500;
-  transition: color 0.3s, transform 0.3s, cursor 0.3s;
+  padding: 0.6rem 1.4rem;
+  border-radius: 50px;
+  border: none;
   cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.signup-link:hover {
-  color: #007bff;
-  transform: scale(1.1);
-  text-decoration: underline;
+.login-button {
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  box-shadow: 0 2px 5px rgba(110, 142, 251, 0.3);
 }
 
-/* Profile Picture (User) */
+.logout-button {
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  color: white;
+  box-shadow: 0 2px 5px rgba(255, 117, 140, 0.3);
+}
+
+.auth-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* User Profile Picture */
 .user-pic {
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  border: 2px solid white;
   object-fit: cover;
-  transition: transform 0.3s, border-color 0.3s;
+  border: 2px solid #eee;
+  transition: all 0.3s ease;
 }
 
 .user-pic:hover {
-  border-color: #007bff;
   transform: scale(1.1);
+  border-color: #007bff;
 }
 
-/* Popup Window */
-.popup-window {
+/* Ripple Effect */
+.auth-button::after {
+  content: "";
   position: absolute;
-  top: 100%;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  width: 200px;
-  text-align: center;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
 }
 
-/* 👇 ADD THIS AT THE END */
-/* Logo Image (logos.png) */
-/* Logo Image (logos.png) */
-.logo-img {
-  height: 4.2rem;  /* Match the font size of the company name */
-  width: auto;     /* Maintain aspect ratio */
-  margin-left: 0px; /* Space between the logo and the company name */
+.auth-button:focus:not(:active)::after {
+  animation: ripple 0.6s ease-out;
 }
 
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(20, 20);
+    opacity: 0;
+  }
+}
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 1rem;
+  }
+  
+  .logo {
+    font-size: 1.8rem;
+  }
+  
+  .logo-img {
+    height: 3rem;
+  }
+  
+  .nav-links {
+    gap: 1rem;
+  }
+  
+  .auth-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}

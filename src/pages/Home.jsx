@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -8,7 +9,13 @@ const Home = () => {
         <p>Streamline your inventory and operations with ease!</p>
 
         <div className="popup-wrapper">
-          <a href="#features" className="btn">Learn More</a>
+          <Link to="/features" className="btn">
+            Learn More
+          </Link>
+        </div>
+
+        <div className="auth-links">
+          {/* Clerk buttons are now in the Navbar */}
         </div>
       </div>
     </section>
